@@ -1,0 +1,13 @@
+# edycja z konta root pliku sudoers:
+# visudo
+
+#dodać na końcu pliku poniższe linijki
+
+# Alias dla polecenia passwd, aby zablokować zmianę hasła root
+Cmnd_Alias PASSWD = /usr/bin/passwd, /usr/bin/passwd [A-Za-z]*
+
+# Alias dla polecenia visudo, aby zablokować edycję pliku sudoers
+Cmnd_Alias EDITSUDOERS = /usr/sbin/visudo
+
+# Zablokowanie poleceń dla grupy sudo
+%sudo ALL=(ALL:ALL) ALL, !PASSWD, !EDITSUDOERS
